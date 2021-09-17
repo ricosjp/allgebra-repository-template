@@ -1,5 +1,5 @@
-VSCode Remote Container example for allgebra containers 
-=======================================================
+VSCode Remote Container for allgebra containers 
+================================================
 
 [ricosjp/allgebra](https://github.com/ricosjp/allgebra) is a project for serving base development containers for HPC users.
 This repository is its sub-project, and shows how to use it with the extension [Remote Container][remote-container] of [Visual Studio Code][vscode].

@@ -14,18 +14,20 @@ Install docker engine and nvidia toolkit
 For Windows 11 (Windows Insider Program)
 ----------------------------------------
 
-In order to use CUDA on WSL2, you have to use the build distributed by [Windows Insider Program](https://insider.windows.com/).
+In order to use CUDA on WSL2, you have to use the build distributed by [Windows Insider Program][WIP].
 
-- Enable [Windows 10 Insider Preview][WIP] with beta channel, and run Windows Update
+- Enable [Windows 10 Insider Program][WIP] with beta channel, and run Windows Update
 - Install [NVIDIA Drivers for CUDA on WSL, including DirectML Support](https://developer.nvidia.com/cuda/wsl/download)
 - Install [Docker Desktop for Windows](https://hub.docker.com/editions/community/docker-ce-desktop-windows)
-  - Use WSL mode instead of Hyper-V mode
+  - Use WSL2 mode instead of Hyper-V mode
 
 Then you can run `docker` command on cmd.exe or PowerShell
 
 ```
 docker run -it --rm --gpus=all ghcr.io/ricosjp/allgebra/cuda11_4/clang12/mkl:21.09.0
 ```
+
+[WIP]: https://insider.windows.com/
 
 How to use
 ----------
@@ -41,4 +43,5 @@ Here, we start setup vscode remote container extension:
   - Then the `docker pull` starts. This will download the allgebra container, which is very large (~8GB) because it contains CUDA and Intel MKL binaries.
   - You can see the downloading log in the vscode's terminal
 - If everything goes well, a new vscode window opens with Remote Container extension.
-  - Open Terminal, and run `clang --version`
+  - Run `nvidia-smi` to confirm the GPUs are accessible
+  - Go `/examples/clang_omp_offloading`, and run `make test` to check correctly setup.

@@ -3,7 +3,7 @@ project(allgebra_vscode_example
     VERSION 0.1.0
     DESCRIPTION "Example project to show the usage of allgebra with Visual Studio Code"
     HOMEPAGE_URL https://github.com/ricosjp/allgebra-remote-container
-    LANGUAGE CXX
+    LANGUAGES CXX
 )
 
 # Find OpenMP runtime

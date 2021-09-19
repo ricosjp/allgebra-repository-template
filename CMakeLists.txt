@@ -5,6 +5,7 @@ project(allgebra_vscode_example
     HOMEPAGE_URL https://github.com/ricosjp/allgebra-remote-container
     LANGUAGES CXX
 )
+enable_testing()
 
 # Find OpenMP runtime
 # See https://cmake.org/cmake/help/latest/module/FindOpenMP.html

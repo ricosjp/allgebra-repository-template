@@ -1,1 +1,6 @@
+# vscode
+.vscode/
 .devcontainer/
+
+# cmake
+build/

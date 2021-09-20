@@ -7,14 +7,22 @@ This repository is its sub-project, and shows how to use it with the extension [
 [remote-container]: https://github.com/microsoft/vscode-dev-containers
 [vscode]: https://github.com/microsoft/vscode
 
-For Linux
-----------
-Install docker engine and nvidia toolkit
+Currently (2021/9) allgebra only supports NVIDIA GPU as accelerator, and this repository focuses to it.
 
-For Windows 11 (Windows Insider Program)
-----------------------------------------
+NVIDIA GPU
+-----------
 
-In order to use CUDA on WSL2, you have to use the build distributed by [Windows Insider Program][WIP].
+### For Linux
+
+Install [docker engine][docker], [docker compose][docker-compose] and [NVIDIA container toolkit][nvidia-container-toolkit]
+
+[docker]: https://docs.docker.com/engine/
+[docker-compose]: https://docs.docker.com/compose/
+[nvidia-container-toolkit]: https://github.com/NVIDIA/nvidia-docker
+
+### For Windows 11 (CUDA on WSL2)
+
+In order to use CUDA on WSL2, you have to use Windows 11 distributed by [Windows Insider Program][WIP].
 
 - Enable [Windows 10 Insider Program][WIP] with beta channel, and run Windows Update
 - Install [NVIDIA Drivers for CUDA on WSL, including DirectML Support](https://developer.nvidia.com/cuda/wsl/download)
@@ -29,8 +37,9 @@ docker run -it --rm --gpus=all ghcr.io/ricosjp/allgebra/cuda11_4/clang12/mkl:21.
 
 [WIP]: https://insider.windows.com/
 
-How to use
-----------
+Windows 10 is not supported because we cannot handle NVIDIA GPU managed by Windows from WSL2 without CUDA on WSL2.
+
+### Setup Remote Container Extension
 
 Here, we start setup vscode remote container extension:
 
@@ -44,4 +53,3 @@ Here, we start setup vscode remote container extension:
   - You can see the downloading log in the vscode's terminal
 - If everything goes well, a new vscode window opens with Remote Container extension.
   - Run `nvidia-smi` to confirm the GPUs are accessible
-  - Go `/examples/clang_omp_offloading`, and run `make test` to check correctly setup.

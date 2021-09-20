@@ -53,3 +53,17 @@ Here, we start setup vscode remote container extension:
   - You can see the downloading log in the vscode's terminal
 - If everything goes well, a new vscode window opens with Remote Container extension.
   - Run `nvidia-smi` to confirm the GPUs are accessible
+
+### Use host SSH key in container
+
+VSCode will expose host's ssh-agent socket into container process, and you can use host SSH key in container.
+See the [official document of vscode](https://code.visualstudio.com/docs/remote/troubleshooting#_setting-up-the-ssh-agent) for detail.
+Roughly,
+
+- Start host ssh-agent process
+  - In Windows, you can check if ssh-agent starts by `Get-Service ssh-agent`
+- `ssh-add` host key to host ssh-agent
+  - When the key is correctly added, `ssh-add -l` command shows the registered key.
+- (Re)start Remote Container
+  - The path of socket connecting to host ssh-agent is written in `$SSH_AUTH_SOCK` env variable
+  - `ssh-add -l` command shows the key registerred on the host

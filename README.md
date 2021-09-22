@@ -1,13 +1,27 @@
-VSCode Remote Container for allgebra containers 
-================================================
+Template for HPC Project
+========================
 
-[ricosjp/allgebra](https://github.com/ricosjp/allgebra) is a project for serving base development containers for HPC users.
-This repository is its sub-project, and shows how to use it with the extension [Remote Container][remote-container] of [Visual Studio Code][vscode].
+🚀 HPC Development Ready 🚀
+
+Features
+---------
+
+- **Uniform**, **Reproducible** setup of HPC development environment using container
+- [CUDA][cuda], [Intel MKL][intel-mkl] integration, and [OpenMP Offloading][openmp-offloading] / [OpenACC][openacc] enabled compilers ([GCC][gcc-openmp-offloading], [Clang][llvm-openmp-offloading]) in a container
+- [GitHub Actions][github-actions] with container and [Visual Studio Code][vscode] [Remote Container][remote-container] exntension settings
+
+[ricosjp/allgebra](https://github.com/ricosjp/allgebra) is a project of development containers for HPC developer,
+and this repository is its sub-project.
 
 [remote-container]: https://github.com/microsoft/vscode-dev-containers
 [vscode]: https://github.com/microsoft/vscode
-
-Currently (2021/9) allgebra only supports NVIDIA GPU as accelerator, and this repository focuses to it.
+[github-actions]: https://docs.github.com/en/actions
+[cuda]: https://developer.nvidia.com/cuda-toolkit
+[intel-mkl]: https://software.intel.com/content/www/us/en/develop/documentation/oneapi-mkl-dpcpp-developer-reference/top.html
+[openmp-offloading]: https://www.openmp.org/updates/openmp-accelerator-support-gpus/
+[openacc]: https://www.openacc.org/
+[gcc-openmp-offloading]: https://gcc.gnu.org/wiki/Offloading
+[llvm-openmp-offloading]: https://openmp.llvm.org/index.html
 
 NVIDIA GPU
 -----------

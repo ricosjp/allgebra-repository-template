@@ -23,8 +23,16 @@ and this repository is its sub-project.
 [gcc-openmp-offloading]: https://gcc.gnu.org/wiki/Offloading
 [llvm-openmp-offloading]: https://openmp.llvm.org/index.html
 
-NVIDIA GPU
------------
+Create new repository
+----------------------
+
+- Login to GitHub
+- Push "Use this template" button ↗️
+
+See also [GitHub Document](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template)
+
+Install Docker with NVIDIA container toolkit
+---------------------------------------------
 
 ### For Linux
 
@@ -53,12 +61,11 @@ docker run -it --rm --gpus=all ghcr.io/ricosjp/allgebra/cuda11_4/clang12/mkl:21.
 
 Windows 10 is not supported because we cannot handle NVIDIA GPU managed by Windows from WSL2 without CUDA on WSL2.
 
-### Setup Remote Container Extension
+VSCode setup
+-------------
 
-Here, we start setup vscode remote container extension:
-
-- Clone this repository
-- Open the cloned directory by [Visual Studio Code][vscode]
+- Clone your repository
+- Open the directory by [Visual Studio Code][vscode]
 - Install [Remote Container][remote-container] extension
 - Click the lower left `><` green button in vscode UI
 - Select "Reopen in Container"
@@ -81,3 +88,9 @@ Roughly,
 - (Re)start Remote Container
   - The path of socket connecting to host ssh-agent is written in `$SSH_AUTH_SOCK` env variable
   - `ssh-add -l` command shows the key registerred on the host
+
+### Recommended Extensions
+
+- [C/C++](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools)
+- [CMake Tools](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cmake-tools)
+- [Nsight Visual Studio Code Edition](https://marketplace.visualstudio.com/items?itemName=NVIDIA.nsight-vscode-edition)

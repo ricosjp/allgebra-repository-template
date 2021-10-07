@@ -37,3 +37,20 @@ jobs:
       run: |
        cd ${{github.workspace}}/build
        ctest -C ${{env.BUILD_TYPE}}
+
+  doxygen:
+    # Runner must be Linux for using docker
+    runs-on: ubuntu-20.04
+    container:
+      # Use allgebra container
+      image: ghcr.io/ricosjp/allgebra/doxygen:21.09.0
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Generate
+      run: doxygen
+    - name: Deploy
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./html

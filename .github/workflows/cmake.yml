@@ -1,22 +1,45 @@
 name: CMake
 
-on: [push, pull_request]
+on:
+  # On every push to `main` branch
+  push:
+    branches:
+      - main  # Change here if you use another branch name
+  # On all pull request
+  pull_request: {}
+  # Manually Trigger
+  workflow_dispatch: {}
 
 env:
   BUILD_TYPE: Release
 
 jobs:
   build:
+    # Runner must be Linux for using docker
     runs-on: ubuntu-20.04
     container:
+      # Use allgebra container
       image: ghcr.io/ricosjp/allgebra/cuda11_4/clang12/mkl:21.09.0
 
     steps:
     - uses: actions/checkout@v2
 
-    - name: Build and Test
+    # cmake configure phase
+    - name: Configure
+      run: >
+       cmake
+        -B ${{github.workspace}}/build
+        -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
+
+    # cmake build phase (use `--build`)
+    - name: Build
+      run: >
+        cmake
+          --build ${{github.workspace}}/build
+          --config ${{env.BUILD_TYPE}}
+
+    # Run ctest
+    - name: Test
       run: |
-       cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
-       cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
        cd ${{github.workspace}}/build
        ctest -C ${{env.BUILD_TYPE}}

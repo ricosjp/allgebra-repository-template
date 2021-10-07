@@ -44,12 +44,9 @@ Install [docker engine][docker], [docker compose][docker-compose] and [NVIDIA co
 
 ### For Windows 11 (CUDA on WSL2)
 
-In order to use CUDA on WSL2, you have to use Windows 11 distributed by [Windows Insider Program][WIP].
-
-- Enable [Windows 10 Insider Program][WIP] with beta channel, and run Windows Update
 - Install [NVIDIA Drivers for CUDA on WSL, including DirectML Support](https://developer.nvidia.com/cuda/wsl/download)
 - Install [Docker Desktop for Windows](https://hub.docker.com/editions/community/docker-ce-desktop-windows)
-  - Use WSL2 mode instead of Hyper-V mode
+  - Confirm docker working in WSL2 mode instead of Hyper-V mode
 
 Then you can run `docker` command on cmd.exe or PowerShell
 
@@ -59,7 +56,8 @@ docker run -it --rm --gpus=all ghcr.io/ricosjp/allgebra/cuda11_4/clang12/mkl:21.
 
 [WIP]: https://insider.windows.com/
 
-Windows 10 is not supported because we cannot handle NVIDIA GPU managed by Windows from WSL2 without CUDA on WSL2.
+Windows 10 is not supported because we cannot handle NVIDIA GPU managed by Windows kernel from WSL2.
+Please upgrade to Windows 11.
 
 VSCode setup
 -------------

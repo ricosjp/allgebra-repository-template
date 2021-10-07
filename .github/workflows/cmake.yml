@@ -63,3 +63,19 @@ jobs:
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./html
+
+  clang-format:
+    # Runner must be Linux for using docker
+    runs-on: ubuntu-20.04
+    container:
+      # Use allgebra container
+      image: ghcr.io/ricosjp/allgebra/clang-format:21.09.0
+
+    steps:
+    - uses: actions/checkout@v2
+
+    # Test if C++ codes are well formatted
+    #
+    # See the script https://github.com/ricosjp/allgebra/blob/latest/check_format.sh
+    - name: check format
+      run: check_format.sh

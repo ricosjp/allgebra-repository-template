@@ -47,10 +47,19 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+
+    # Generate document by doxygen based on Doxyfile
     - name: Generate
       run: doxygen
+
+    # Deploy generated HTML to GitHub Pages
+    #
+    # This must be run on `main` branch because it always overwrites previous build.
+    # You have to setup GitHub Pages on your repository.
+    # See https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site
     - name: Deploy
       uses: peaceiris/actions-gh-pages@v3
+      if: ${{ github.ref == 'refs/heads/main' }}
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./html

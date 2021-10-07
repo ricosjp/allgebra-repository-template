@@ -1,0 +1,81 @@
+name: C++
+
+on:
+  # On every push to `main` branch
+  push:
+    branches:
+      - main  # Change here if you use another branch name
+  # On all pull request
+  pull_request: {}
+  # Manually Trigger
+  workflow_dispatch: {}
+
+env:
+  BUILD_TYPE: Release
+
+jobs:
+  build_and_test:
+    # Runner must be Linux for using docker
+    runs-on: ubuntu-20.04
+    container:
+      # Use allgebra container
+      image: ghcr.io/ricosjp/allgebra/cuda11_4/clang12/mkl:21.09.0
+
+    steps:
+    - uses: actions/checkout@v2
+
+    # cmake configure phase
+    - name: Configure
+      run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
+
+    # cmake build phase (use `--build`)
+    - name: Build
+      run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
+
+    # Run ctest
+    - name: Test
+      run: |
+       cd ${{github.workspace}}/build
+       ctest -C ${{env.BUILD_TYPE}}
+
+  doxygen:
+    # Runner must be Linux for using docker
+    runs-on: ubuntu-20.04
+    container:
+      # Use allgebra container
+      image: ghcr.io/ricosjp/allgebra/doxygen:21.09.0
+
+    steps:
+    - uses: actions/checkout@v2
+
+    # Generate document by doxygen based on Doxyfile
+    - name: Generate
+      run: doxygen
+
+    # Deploy generated HTML to GitHub Pages
+    #
+    # This must be run on `main` branch because it always overwrites previous build.
+    # You have to setup GitHub Pages on your repository.
+    # See https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site
+    - name: Deploy
+      uses: peaceiris/actions-gh-pages@v3
+      if: ${{ github.ref == 'refs/heads/main' }}
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./html
+
+  clang-format:
+    # Runner must be Linux for using docker
+    runs-on: ubuntu-20.04
+    container:
+      # Use allgebra container
+      image: ghcr.io/ricosjp/allgebra/clang-format:21.09.0
+
+    steps:
+    - uses: actions/checkout@v2
+
+    # Test if C++ codes are well formatted
+    - name: check format
+      run: |
+        clang-format -i src/*.[ch]pp
+        git diff --exit-code

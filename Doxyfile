@@ -1,0 +1,8 @@
+PROJECT_NAME = "AllgebraTemplate"
+PROJECT_NUMBER = "0.1.0"
+
+INPUT = ./src/
+EXTRACT_ALL = YES
+
+# Disable LaTeX output
+GENERATE_LATEX = NO

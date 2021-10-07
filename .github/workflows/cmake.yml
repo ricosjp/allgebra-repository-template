@@ -14,7 +14,7 @@ env:
   BUILD_TYPE: Release
 
 jobs:
-  build:
+  build_and_test:
     # Runner must be Linux for using docker
     runs-on: ubuntu-20.04
     container:
@@ -26,17 +26,11 @@ jobs:
 
     # cmake configure phase
     - name: Configure
-      run: >
-       cmake
-        -B ${{github.workspace}}/build
-        -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
+      run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
 
     # cmake build phase (use `--build`)
     - name: Build
-      run: >
-        cmake
-          --build ${{github.workspace}}/build
-          --config ${{env.BUILD_TYPE}}
+      run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
 
     # Run ctest
     - name: Test

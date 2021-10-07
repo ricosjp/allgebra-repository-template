@@ -75,7 +75,7 @@ jobs:
     - uses: actions/checkout@v2
 
     # Test if C++ codes are well formatted
-    #
-    # See the script https://github.com/ricosjp/allgebra/blob/latest/check_format.sh
     - name: check format
-      run: check_format.sh
+      run: |
+        clang-format -i src/*.[ch]pp
+        git diff --exit-code

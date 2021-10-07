@@ -7,4 +7,4 @@
  * @param a first array
  * @param b second array
  */
-double dot(int N, double* a, double * b);
+double dot(int N, double *a, double *b);

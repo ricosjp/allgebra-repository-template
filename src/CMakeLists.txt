@@ -8,3 +8,7 @@ add_executable(openmp_test
 target_link_libraries(openmp_test OpenMP::OpenMP_CXX)
 
 add_test(openmp_test openmp_test)
+
+add_library(mylib
+  dot.cpp
+)
